@@ -19,7 +19,7 @@ quote_lookahead_pattern = r'(?=(?:[^"]*"[^"]*")*[^"]*$)'
 remark_pattern = r'REM.*$'
 
 keyword_pattern = r'READ|IF|AND|OR|NOT|THEN|FOR|TO|NEXT|GOTO|GOSUB|RETURN|VTAB|HTAB|TEXT|HOME|INT|RND|CHR|STR\$|INPUT' \
-                  r'|MID|PEEK|POKE|CALL|NORMAL|INVERSE|FLASH|PRINT|DIM|HPLOT|STEP|END|RUN|SGN|STOP'
+                  r'|MID|PEEK|POKE|CALL|NORMAL|INVERSE|FLASH|PRINT|DIM|HPLOT|STEP|END|RUN|SGN|STOP|LOG|SIN|COS|LEN|GET'
 
 string_int_identifier_pattern = r'(?:[a-z_][a-z0-9_]*?[$%])'
 
