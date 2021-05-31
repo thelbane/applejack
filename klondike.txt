@@ -1,40 +1,40 @@
 REM Klondike Solitaire
 REM By Lee Fastenau
 
-#DEFINE FATAL(STR) DEBUG("ERR: " + STR) : STOP
-#DEFINE DEBUG(STR) LOG_STRING$ = STR : GOSUB .log
+#define FATAL(STR) DEBUG("ERR: " + STR) : STOP
+#define DEBUG(STR) LOG_STRING$ = STR : GOSUB .log
 
-#DEFINE DEAL_COUNT 1
-#DEFINE CURSOR CR
-#DEFINE CURSOR_ERASE CE
-#DEFINE DROP_CURSOR DC
-#DEFINE BLINK_SPEED 4
-#DEFINE CARD_WIDTH 6
+#define DEAL_COUNT 1
+#define CURSOR CR
+#define CURSOR_ERASE CE
+#define DROP_CURSOR DC
+#define BLINK_SPEED 4
+#define CARD_WIDTH 6
 
-#DEFINE CR_STOCK 0
-#DEFINE CR_HAND 1
-#DEFINE CR_FOUNDATION 2
-#DEFINE CR_TABLEAU 3
+#define CR_STOCK 0
+#define CR_HAND 1
+#define CR_FOUNDATION 2
+#define CR_TABLEAU 3
 
-#DEFINE STOCK ST
-#DEFINE HAND HA
-#DEFINE KING 12
+#define STOCK ST
+#define HAND HA
+#define KING 12
 
-#DEFINE TMAX 6
-#DEFINE FMAX 3
-#DEFINE CARDMAX 51
+#define TMAX 6
+#define FMAX 3
+#define CARDMAX 51
 
-#DEFINE LEFT_EDGE 1
-#DEFINE CURSOR_STR "^^^^"
-#DEFINE BLANK_STR "    "
-#DEFINE SLOT_STR "[  ]"
-#DEFINE DRAW_STR "DRAW"
-#DEFINE BACK_STR "____"
-#DEFINE TEMP TE
-#DEFINE LOG_STRING LGSTRNG
-#DEFINE DID_WIN DIDWN
+#define LEFT_EDGE 1
+#define CURSOR_STR "^^^^"
+#define BLANK_STR "    "
+#define SLOT_STR "[  ]"
+#define DRAW_STR "DRAW"
+#define BACK_STR "____"
+#define TEMP TE
+#define LOG_STRING LGSTRNG
+#define DID_WIN DIDWN
 
-#DEFINE CARD_TYPE INT(CARD/4)
+#define CARD_TYPE INT(CARD/4)
 
 REM T/T1 = Tableau Face Down
 REM U/U1 = Tableau Face Up
@@ -45,19 +45,19 @@ GOSUB .initialize
 
 .mainLoop
     GOSUB .titleScreen
-	GOSUB .resetAllStacks
-	GOSUB .shuffleDeck
-	GOSUB .deal
-	GOSUB .pressAnyKey
-	GOSUB .renderAll
-	GOSUB .gameLoop
-	GOTO .mainLoop
+    GOSUB .resetAllStacks
+    GOSUB .shuffleDeck
+    GOSUB .deal
+    GOSUB .pressAnyKey
+    GOSUB .renderAll
+    GOSUB .gameLoop
+    GOTO .mainLoop
 
 .gameLoop
-	GOSUB .selectCard
-	GOSUB .moveCard
-	GOSUB .checkWin
-	IF DID_WIN THEN RETURN
+    GOSUB .selectCard
+    GOSUB .moveCard
+    GOSUB .checkWin
+    IF DID_WIN THEN RETURN
     GOTO .gameLoop
 
 REM ***********************************
@@ -65,379 +65,379 @@ REM ** NEW GAME FUNCTIONS
 REM ***********************************
 
 .resetAllStacks
-	FOR N = 0 TO 6
-	    T1(N) = 0
-	    U1(N) = 0
-	NEXT
-	FOR N = 0 TO 3
-	    F1(N) = 0
-	NEXT
-	STOCK = 0
-	HAND = 0
-	RETURN
+    FOR N = 0 TO 6
+        T1(N) = 0
+        U1(N) = 0
+    NEXT
+    FOR N = 0 TO 3
+        F1(N) = 0
+    NEXT
+    STOCK = 0
+    HAND = 0
+    RETURN
 
 .shuffleDeck
-	FOR N = 0 TO CARDMAX
-	    STOCK(N) = 51 - N
-	NEXT
-	FOR N = 0 TO CARDMAX
-	    TEMP = ST(N)
-	    R = RND(1)*52
-	    STOCK(N) = STOCK(R)
-	    STOCK(R) = TEMP
-	NEXT
-	STOCK=52
-	RETURN
+    FOR N = 0 TO CARDMAX
+        STOCK(N) = 51 - N
+    NEXT
+    FOR N = 0 TO CARDMAX
+        TEMP = ST(N)
+        R = RND(1)*52
+        STOCK(N) = STOCK(R)
+        STOCK(R) = TEMP
+    NEXT
+    STOCK=52
+    RETURN
 
 .deal
-	FOR T = 0 TO TMAX
-	    FOR M = 0 TO TMAX
-	        IF M < T THEN GOSUB .drawFromStock : GOSUB .placeFaceDown
-	        IF M = T THEN GOSUB .drawFromStock : GOSUB .placeFaceUp
-	    NEXT
-	NEXT
-	CURSOR = 0
-	DID_WIN = 0
-	RETURN
+    FOR T = 0 TO TMAX
+        FOR M = 0 TO TMAX
+            IF M < T THEN GOSUB .drawFromStock : GOSUB .placeFaceDown
+            IF M = T THEN GOSUB .drawFromStock : GOSUB .placeFaceUp
+        NEXT
+    NEXT
+    CURSOR = 0
+    DID_WIN = 0
+    RETURN
 
 REM ***********************************
 REM ** DRAW CARDS FROM PILES
 REM ***********************************
 
 .drawFromStock
-	STOCK=STOCK-1
-	CARD=STOCK(STOCK)
-	RETURN
+    STOCK=STOCK-1
+    CARD=STOCK(STOCK)
+    RETURN
 
 .drawFromHand
-	HAND=HAND-1
-	CARD=HAND(HAND)
-	RETURN
+    HAND=HAND-1
+    CARD=HAND(HAND)
+    RETURN
 
 .drawFromTableau
-	CARD = U(T,U1(T)-CARD_POS-1)
-	RETURN
+    CARD = U(T,U1(T)-CARD_POS-1)
+    RETURN
 
 .placeFaceDown
-	T(T,T1(T))=CARD
-	T1(T)=T1(T)+1
-	RETURN
+    T(T,T1(T))=CARD
+    T1(T)=T1(T)+1
+    RETURN
 
 .placeFaceUp
-	U(T,U1(T))=CARD
-	U1(T)=U1(T)+1
-	RETURN
+    U(T,U1(T))=CARD
+    U1(T)=U1(T)+1
+    RETURN
 
 .placeOnFoundation
-	F(F,F1(F))=CARD
-	F1(F)=F1(F)+1
-	RETURN
+    F(F,F1(F))=CARD
+    F1(F)=F1(F)+1
+    RETURN
 
 .placeInHand
-	HAND(HAND)=CARD
-	HAND=HAND+1
-	RETURN
+    HAND(HAND)=CARD
+    HAND=HAND+1
+    RETURN
 
 .placeInStock
-	STOCK(STOCK)=CARD
-	STOCK=STOCK+1
-	RETURN
+    STOCK(STOCK)=CARD
+    STOCK=STOCK+1
+    RETURN
 
 REM ***********************************
 REM ** RENDER CARDS
 REM ***********************************
 
 .renderAll
-	TEXT
-	HOME
-	GOSUB .renderStockAndHand
-	FOR T = 0 TO 6
-	    GOSUB .renderTableau
+    TEXT
+    HOME
+    GOSUB .renderStockAndHand
+    FOR T = 0 TO 6
+        GOSUB .renderTableau
     NEXT
-	FOR F = 0 TO 3
-	    GOSUB .renderFoundation
-	NEXT
-	RETURN
+    FOR F = 0 TO 3
+        GOSUB .renderFoundation
+    NEXT
+    RETURN
 
 .renderStockAndHand
-	Q=CARD
-	VTAB TV
-	HTAB LEFT_EDGE
-	IF STOCK>0 THEN CARD=STOCK(STOCK-1) : INVERSE : ?DRAW_STR; : NORMAL : GOTO.L017
-	PRINT SLOT_STR;
-	.L017
-	HTAB CARD_WIDTH+LEFT_EDGE
-	IF HAND>0 THEN CARD=HAND(HAND-1):GOSUB .renderCard:GOTO.L018
-	PRINT BLANK_STR;
-	.L018
-	CARD=Q
-	RETURN
+    Q=CARD
+    VTAB TV
+    HTAB LEFT_EDGE
+    IF STOCK>0 THEN CARD=STOCK(STOCK-1) : INVERSE : ?DRAW_STR; : NORMAL : GOTO.L017
+    PRINT SLOT_STR;
+    .L017
+    HTAB CARD_WIDTH+LEFT_EDGE
+    IF HAND>0 THEN CARD=HAND(HAND-1):GOSUB .renderCard:GOTO.L018
+    PRINT BLANK_STR;
+    .L018
+    CARD=Q
+    RETURN
 
 .renderTableau
-	Q=CARD
-	IFT1(T)>0THEN FORN=0TOT1(T)-1:CARD=U(T,N):VTABBV+N:HTABT*CARD_WIDTH+LEFT_EDGE:GOSUB .renderCardBack:NEXT
-	IFU1(T)>0THEN FORN=0TOU1(T)-1:CARD=U(T,N):VTABBV+T1(T)+N:HTABT*CARD_WIDTH+LEFT_EDGE:GOSUB .renderCard:NEXT
-	VTABBV+T1(T)+U1(T):HTABT*CARD_WIDTH+LEFT_EDGE:PRINT BLANK_STR
-	CARD=Q:RETURN
+    Q=CARD
+    IFT1(T)>0THEN FORN=0TOT1(T)-1:CARD=U(T,N):VTABBV+N:HTABT*CARD_WIDTH+LEFT_EDGE:GOSUB .renderCardBack:NEXT
+    IFU1(T)>0THEN FORN=0TOU1(T)-1:CARD=U(T,N):VTABBV+T1(T)+N:HTABT*CARD_WIDTH+LEFT_EDGE:GOSUB .renderCard:NEXT
+    VTABBV+T1(T)+U1(T):HTABT*CARD_WIDTH+LEFT_EDGE:PRINT BLANK_STR
+    CARD=Q:RETURN
 
 .renderFoundation
-	Q=CARD:HTAB (F+3)*CARD_WIDTH+LEFT_EDGE:VTAB TV
-	IF F1(F)>0 THEN CARD=F(F,F1(F)-1):GOSUB .renderCard:RETURN
-	PRINT SLOT_STR;:CARD=Q:RETURN
+    Q=CARD:HTAB (F+3)*CARD_WIDTH+LEFT_EDGE:VTAB TV
+    IF F1(F)>0 THEN CARD=F(F,F1(F)-1):GOSUB .renderCard:RETURN
+    PRINT SLOT_STR;:CARD=Q:RETURN
 
 .setCardColor
-	IF CARD/2<>INT(CARD/2) THEN INVERSE
-	RETURN
+    IF CARD/2<>INT(CARD/2) THEN INVERSE
+    RETURN
 
 .renderCard
-	GOSUB .setCardColor : GOSUB .getCardFace : PRINT C$;
-	NORMAL : RETURN
+    GOSUB .setCardColor : GOSUB .getCardFace : PRINT C$;
+    NORMAL : RETURN
 
 .getCardFace
-	C$ = MID$(CARD$,CARD_TYPE*2+1,2)+MID$(SUIT$,(CARD-(CARD_TYPE*4))*2+1,2):RETURN
+    C$ = MID$(CARD$,CARD_TYPE*2+1,2)+MID$(SUIT$,(CARD-(CARD_TYPE*4))*2+1,2):RETURN
 
 .renderCardBack
-	INVERSE:?BACK_STR;:NORMAL:RETURN
+    INVERSE:?BACK_STR;:NORMAL:RETURN
 
 REM ***********************************
 REM ** HANDLE PLAYER INPUT
 REM ***********************************
 
 .selectCard
-	GOSUB .getCursor
-	IF CURSOR = CR_TABLEAU AND CARD_POS > 0 THEN GOSUB .setCardColor
-	.selectCursorLoop
-		GOSUB .drawCursor : GOSUB .waitKey : IF K >= 0 THEN GOTO .selectKeyPressed
-		GOSUB .eraseCursor : GOSUB .waitKey : IF K < 0 THEN GOTO .selectCursorLoop
-	.selectKeyPressed
-	GOSUB .eraseCursor
-	NORMAL
-	IF K = 8 THEN GOSUB .cursorLeft : GOTO .selectCard
-	IF K = 21 THEN GOSUB .cursorRight : GOTO .selectCard
-	IF K = 11 OR K = 65 THEN GOSUB .cursorUp : GOTO .selectCard
-	IF K = 10 OR K = 90 THEN GOSUB .cursorDown : GOTO .selectCard
-	IF K = 32 THEN CT = T : CF = F : RETURN
-	GOTO .selectCard
+    GOSUB .getCursor
+    IF CURSOR = CR_TABLEAU AND CARD_POS > 0 THEN GOSUB .setCardColor
+    .selectCursorLoop
+        GOSUB .drawCursor : GOSUB .waitKey : IF K >= 0 THEN GOTO .selectKeyPressed
+        GOSUB .eraseCursor : GOSUB .waitKey : IF K < 0 THEN GOTO .selectCursorLoop
+    .selectKeyPressed
+    GOSUB .eraseCursor
+    NORMAL
+    IF K = 8 THEN GOSUB .cursorLeft : GOTO .selectCard
+    IF K = 21 THEN GOSUB .cursorRight : GOTO .selectCard
+    IF K = 11 OR K = 65 THEN GOSUB .cursorUp : GOTO .selectCard
+    IF K = 10 OR K = 90 THEN GOSUB .cursorDown : GOTO .selectCard
+    IF K = 32 THEN CT = T : CF = F : RETURN
+    GOTO .selectCard
 
 .cursorLeft
-	IF CURSOR <> CR_TABLEAU THEN GOTO .cursorLeftFoundation
-		T = T - 1 : IF T < 0 THEN T = TMAX
-		CARD_POS = 0
-		RETURN
-	.cursorLeftFoundation
-	IF CURSOR <> CR_FOUNDATION THEN GOTO .cursorLeftHand
-		F = F - 1 : IF F < 0 then CURSOR = CR_HAND
-		RETURN
-	.cursorLeftHand
-	IF CURSOR = CR_HAND THEN CURSOR = CR_STOCK : RETURN
-	CURSOR = CR_FOUNDATION : F = FMAX : RETURN
+    IF CURSOR <> CR_TABLEAU THEN GOTO .cursorLeftFoundation
+        T = T - 1 : IF T < 0 THEN T = TMAX
+        CARD_POS = 0
+        RETURN
+    .cursorLeftFoundation
+    IF CURSOR <> CR_FOUNDATION THEN GOTO .cursorLeftHand
+        F = F - 1 : IF F < 0 then CURSOR = CR_HAND
+        RETURN
+    .cursorLeftHand
+    IF CURSOR = CR_HAND THEN CURSOR = CR_STOCK : RETURN
+    CURSOR = CR_FOUNDATION : F = FMAX : RETURN
 
 .cursorRight
-	IF CURSOR = CR_STOCK THEN CURSOR = CR_HAND : RETURN
-	IF CURSOR = CR_HAND THEN CURSOR = CR_FOUNDATION : F = 0 : RETURN
-	IF CURSOR <> CR_FOUNDATION THEN GOTO .cursorRightTableau
-		F = F + 1 : IF F > FMAX THEN CURSOR = 0
-		RETURN
-	.cursorRightTableau
-	T = T + 1 : IF T > TMAX THEN T = 0
-	CARD_POS = 0
-	RETURN
+    IF CURSOR = CR_STOCK THEN CURSOR = CR_HAND : RETURN
+    IF CURSOR = CR_HAND THEN CURSOR = CR_FOUNDATION : F = 0 : RETURN
+    IF CURSOR <> CR_FOUNDATION THEN GOTO .cursorRightTableau
+        F = F + 1 : IF F > FMAX THEN CURSOR = 0
+        RETURN
+    .cursorRightTableau
+    T = T + 1 : IF T > TMAX THEN T = 0
+    CARD_POS = 0
+    RETURN
 
 .cursorUp
-	IF CURSOR <> CR_TABLEAU THEN RETURN
-	IF CARD_POS < U1(T) - 1 THEN CARD_POS = CARD_POS + 1 : RETURN
-	IF T < 2 THEN CURSOR = T : RETURN
-	IF T > 2 THEN CURSOR = CR_FOUNDATION : F = T - 3 : RETURN
-	CURSOR = CR_HAND
-	RETURN
+    IF CURSOR <> CR_TABLEAU THEN RETURN
+    IF CARD_POS < U1(T) - 1 THEN CARD_POS = CARD_POS + 1 : RETURN
+    IF T < 2 THEN CURSOR = T : RETURN
+    IF T > 2 THEN CURSOR = CR_FOUNDATION : F = T - 3 : RETURN
+    CURSOR = CR_HAND
+    RETURN
 
 .cursorDown
-	IF CURSOR < 2 THEN T = CURSOR : CARD_POS = 0 : CURSOR = CR_TABLEAU : RETURN
-	IF CURSOR = 2 THEN T = F + 3 : CARD_POS = 0 : CURSOR = CR_TABLEAU : RETURN
-	IF CARD_POS > 0 THEN CARD_POS = CARD_POS - 1 : RETURN
-	RETURN
+    IF CURSOR < 2 THEN T = CURSOR : CARD_POS = 0 : CURSOR = CR_TABLEAU : RETURN
+    IF CURSOR = 2 THEN T = F + 3 : CARD_POS = 0 : CURSOR = CR_TABLEAU : RETURN
+    IF CARD_POS > 0 THEN CARD_POS = CARD_POS - 1 : RETURN
+    RETURN
 
 .waitKey
-	FOR WK = 0 TO BLINK_SPEED:K=PEEK(-16384)-128:IFK<0 THEN NEXT
-	IF K>=0 THEN POKE-16368,0
-	RETURN
+    FOR WK = 0 TO BLINK_SPEED:K=PEEK(-16384)-128:IFK<0 THEN NEXT
+    IF K>=0 THEN POKE-16368,0
+    RETURN
 
 .drawCursor
-	VTAB CY : HTAB CX : PRINT CURSOR$ : RETURN
+    VTAB CY : HTAB CX : PRINT CURSOR$ : RETURN
 
 .eraseCursor
-	VTAB CY : HTAB CX : PRINT CURSOR_ERASE$ : RETURN
+    VTAB CY : HTAB CX : PRINT CURSOR_ERASE$ : RETURN
 
 .getCursor
-	CURSOR$ = CURSOR_STR : CURSOR_ERASE$ = BLANK_STR
-	IF CURSOR < CR_FOUNDATION THEN CY = TV + 1 : CX = CURSOR * CARD_WIDTH + LEFT_EDGE : RETURN
-	IF CURSOR = CR_FOUNDATION THEN CY = TV + 1 : CX = (F+3) * CARD_WIDTH + LEFT_EDGE : RETURN
-	IF CARD_POS > 0 THEN CARD = U(T,U1(T)-1-CARD_POS) : GOSUB .getCardFace : CURSOR$ = BLANK_STR : CURSOR_ERASE$ = C$
-	CY = BV + T1(T) + U1(T) - CARD_POS - (CARD_POS>0) : CX = T * CARD_WIDTH + LEFT_EDGE : RETURN
+    CURSOR$ = CURSOR_STR : CURSOR_ERASE$ = BLANK_STR
+    IF CURSOR < CR_FOUNDATION THEN CY = TV + 1 : CX = CURSOR * CARD_WIDTH + LEFT_EDGE : RETURN
+    IF CURSOR = CR_FOUNDATION THEN CY = TV + 1 : CX = (F+3) * CARD_WIDTH + LEFT_EDGE : RETURN
+    IF CARD_POS > 0 THEN CARD = U(T,U1(T)-1-CARD_POS) : GOSUB .getCardFace : CURSOR$ = BLANK_STR : CURSOR_ERASE$ = C$
+    CY = BV + T1(T) + U1(T) - CARD_POS - (CARD_POS>0) : CX = T * CARD_WIDTH + LEFT_EDGE : RETURN
 
 REM ***********************************
 REM ** MOVE CARD
 REM ***********************************
 
 .moveCard
-	IF CURSOR = CR_STOCK THEN GOSUB .selectStock: RETURN
-	IF CURSOR = CR_HAND THEN GOSUB .selectHand: RETURN
-	IF CURSOR = CR_FOUNDATION THEN GOSUB .selectFoundation: RETURN
-	IF CURSOR = CR_TABLEAU THEN GOSUB .selectTableau: RETURN
+    IF CURSOR = CR_STOCK THEN GOSUB .selectStock: RETURN
+    IF CURSOR = CR_HAND THEN GOSUB .selectHand: RETURN
+    IF CURSOR = CR_FOUNDATION THEN GOSUB .selectFoundation: RETURN
+    IF CURSOR = CR_TABLEAU THEN GOSUB .selectTableau: RETURN
 
 .selectStock
-	IF STOCK = 0 THEN GOTO .replenishStock
+    IF STOCK = 0 THEN GOTO .replenishStock
     FOR DD = 1 TO DEAL_COUNT
         IF STOCK > 0 THEN GOSUB .drawFromStock : GOSUB .placeInHand : GOSUB .renderStockAndHand
     NEXT
     RETURN
 
 .selectHand
-	IF HAND = 0 THEN RETURN
-	GOSUB .drawFromHand
-	GOSUB .renderStockAndHand
-	GOSUB .placeSelectedCard
-	RETURN
+    IF HAND = 0 THEN RETURN
+    GOSUB .drawFromHand
+    GOSUB .renderStockAndHand
+    GOSUB .placeSelectedCard
+    RETURN
 
 .selectTableau
     IF U1(CT) < 1 THEN RETURN
-	GOSUB .drawFromTableau
-	GOSUB .placeSelectedCard
-	RETURN
+    GOSUB .drawFromTableau
+    GOSUB .placeSelectedCard
+    RETURN
 
 .selectFoundation
-	RETURN
+    RETURN
 
 .replenishStock
-	IF HAND = 0 THEN GOSUB .renderStockAndHand : RETURN
-	GOSUB .drawFromHand
-	GOSUB .placeInStock
-	GOTO .replenishStock
+    IF HAND = 0 THEN GOSUB .renderStockAndHand : RETURN
+    GOSUB .drawFromHand
+    GOSUB .placeInStock
+    GOTO .replenishStock
 
 .placeSelectedCard
-	GOSUB .getCardFace : CURSOR$ = C$ : CURSOR_ERASE$ = BLANK_STR
-	DROP_CURSOR = CURSOR
-	.dropCursorLoop
-	GOSUB .getDropCursor
-	.dropCursorInnerLoop
-		GOSUB .setCardColor : GOSUB .drawCursor : GOSUB .waitKey : IF K >= 0 THEN GOTO .dropKeyPressed
-		NORMAL : GOSUB .eraseCursor : GOSUB .waitKey : IF K < 0 THEN GOTO .dropCursorInnerLoop
-	.dropKeyPressed
-	NORMAL : GOSUB .eraseCursor
-	IF K = 8 THEN GOSUB .dropCursorLeft : GOTO .dropCursorLoop
-	IF K = 21 THEN GOSUB .dropCursorRight : GOTO .dropCursorLoop
-	IF K = 11 OR K = 65 THEN GOSUB .dropCursorUp : GOTO .dropCursorLoop
-	IF K = 10 OR K = 90 THEN GOSUB .dropCursorDown : GOTO .dropCursorLoop
-	IF K <> 32 THEN GOTO .dropCursorLoop
-	IF DROP_CURSOR = CR_HAND THEN GOSUB .placeInHand : GOSUB .renderStockAndHand : RETURN
-	IF DROP_CURSOR = CR_FOUNDATION THEN GOSUB .tryPlayOnFoundation : IF OK THEN CURSOR = DROP_CURSOR : RETURN
-	IF DROP_CURSOR = CR_TABLEAU THEN GOSUB .playOnTableau : IF OK THEN CURSOR = DROP_CURSOR : CARD_POS = 0 : RETURN
-	GOTO .dropCursorLoop
+    GOSUB .getCardFace : CURSOR$ = C$ : CURSOR_ERASE$ = BLANK_STR
+    DROP_CURSOR = CURSOR
+    .dropCursorLoop
+    GOSUB .getDropCursor
+    .dropCursorInnerLoop
+        GOSUB .setCardColor : GOSUB .drawCursor : GOSUB .waitKey : IF K >= 0 THEN GOTO .dropKeyPressed
+        NORMAL : GOSUB .eraseCursor : GOSUB .waitKey : IF K < 0 THEN GOTO .dropCursorInnerLoop
+    .dropKeyPressed
+    NORMAL : GOSUB .eraseCursor
+    IF K = 8 THEN GOSUB .dropCursorLeft : GOTO .dropCursorLoop
+    IF K = 21 THEN GOSUB .dropCursorRight : GOTO .dropCursorLoop
+    IF K = 11 OR K = 65 THEN GOSUB .dropCursorUp : GOTO .dropCursorLoop
+    IF K = 10 OR K = 90 THEN GOSUB .dropCursorDown : GOTO .dropCursorLoop
+    IF K <> 32 THEN GOTO .dropCursorLoop
+    IF DROP_CURSOR = CR_HAND THEN GOSUB .placeInHand : GOSUB .renderStockAndHand : RETURN
+    IF DROP_CURSOR = CR_FOUNDATION THEN GOSUB .tryPlayOnFoundation : IF OK THEN CURSOR = DROP_CURSOR : RETURN
+    IF DROP_CURSOR = CR_TABLEAU THEN GOSUB .playOnTableau : IF OK THEN CURSOR = DROP_CURSOR : CARD_POS = 0 : RETURN
+    GOTO .dropCursorLoop
 
 .dropCursorLeft
-	IF DROP_CURSOR <> CR_TABLEAU THEN GOTO .dropCursorLeftFoundation
-		T = T - 1 : IF T < 0 THEN T = TMAX
-		RETURN
-	.dropCursorLeftFoundation
-	IF DROP_CURSOR <> CR_FOUNDATION THEN GOTO .dropCursorLeftHand
-		F = F - 1 : IF F >= 0 THEN RETURN
-		IF CURSOR = CR_HAND THEN DROP_CURSOR = CR_HAND : RETURN
-		F = FMAX : RETURN
-	.dropCursorLeftHand
-	DROP_CURSOR = CR_FOUNDATION : F = FMAX
-	RETURN
+    IF DROP_CURSOR <> CR_TABLEAU THEN GOTO .dropCursorLeftFoundation
+        T = T - 1 : IF T < 0 THEN T = TMAX
+        RETURN
+    .dropCursorLeftFoundation
+    IF DROP_CURSOR <> CR_FOUNDATION THEN GOTO .dropCursorLeftHand
+        F = F - 1 : IF F >= 0 THEN RETURN
+        IF CURSOR = CR_HAND THEN DROP_CURSOR = CR_HAND : RETURN
+        F = FMAX : RETURN
+    .dropCursorLeftHand
+    DROP_CURSOR = CR_FOUNDATION : F = FMAX
+    RETURN
 
 .dropCursorRight
-	IF DROP_CURSOR <> CR_TABLEAU THEN GOTO .dropCursorRightHand
-		T = T + 1 : IF T > TMAX THEN T = 0
-		RETURN
-	.dropCursorRightHand
-	IF DROP_CURSOR = CR_HAND THEN DROP_CURSOR = CR_FOUNDATION : F = 0 : RETURN
-	F = F + 1 : IF F <= FMAX THEN RETURN
-	IF CURSOR = CR_HAND THEN DROP_CURSOR = CR_HAND : RETURN
-	F = 0 : RETURN
+    IF DROP_CURSOR <> CR_TABLEAU THEN GOTO .dropCursorRightHand
+        T = T + 1 : IF T > TMAX THEN T = 0
+        RETURN
+    .dropCursorRightHand
+    IF DROP_CURSOR = CR_HAND THEN DROP_CURSOR = CR_FOUNDATION : F = 0 : RETURN
+    F = F + 1 : IF F <= FMAX THEN RETURN
+    IF CURSOR = CR_HAND THEN DROP_CURSOR = CR_HAND : RETURN
+    F = 0 : RETURN
 
 .dropCursorUp
-	IF DROP_CURSOR < CR_TABLEAU OR (CURSOR = CR_TABLEAU AND CARD_POS > 0) THEN RETURN
-	IF T > 2 THEN DROP_CURSOR = CR_FOUNDATION : F = T - 3 : RETURN
-	IF CURSOR = CR_HAND THEN DROP_CURSOR = CR_HAND : RETURN
-	DROP_CURSOR = CR_FOUNDATION : F = 0 : RETURN
+    IF DROP_CURSOR < CR_TABLEAU OR (CURSOR = CR_TABLEAU AND CARD_POS > 0) THEN RETURN
+    IF T > 2 THEN DROP_CURSOR = CR_FOUNDATION : F = T - 3 : RETURN
+    IF CURSOR = CR_HAND THEN DROP_CURSOR = CR_HAND : RETURN
+    DROP_CURSOR = CR_FOUNDATION : F = 0 : RETURN
 
 .dropCursorDown
-	IF DROP_CURSOR = CR_TABLEAU THEN RETURN
-	IF DROP_CURSOR < 2 THEN DROP_CURSOR = CR_TABLEAU : T = 1 : RETURN
-	DROP_CURSOR = CR_TABLEAU : T = F + 3 : RETURN
+    IF DROP_CURSOR = CR_TABLEAU THEN RETURN
+    IF DROP_CURSOR < 2 THEN DROP_CURSOR = CR_TABLEAU : T = 1 : RETURN
+    DROP_CURSOR = CR_TABLEAU : T = F + 3 : RETURN
 
 .getDropCursor
-	IF DROP_CURSOR < CR_FOUNDATION THEN CY = TV + 1 : CX = DROP_CURSOR * CARD_WIDTH + LEFT_EDGE : RETURN
-	IF DROP_CURSOR = CR_FOUNDATION THEN CY = TV + 1 : CX = (F+3) * CARD_WIDTH + LEFT_EDGE : RETURN
-	IF CURSOR = CR_TABLEAU AND T = CT THEN CY = BV + T1(T) + U1(T) - CARD_POS - 1 : CX = T * CARD_WIDTH + LEFT_EDGE : RETURN
-	CY = BV + T1(T) + U1(T) : CX = T * CARD_WIDTH + LEFT_EDGE : RETURN
+    IF DROP_CURSOR < CR_FOUNDATION THEN CY = TV + 1 : CX = DROP_CURSOR * CARD_WIDTH + LEFT_EDGE : RETURN
+    IF DROP_CURSOR = CR_FOUNDATION THEN CY = TV + 1 : CX = (F+3) * CARD_WIDTH + LEFT_EDGE : RETURN
+    IF CURSOR = CR_TABLEAU AND T = CT THEN CY = BV + T1(T) + U1(T) - CARD_POS - 1 : CX = T * CARD_WIDTH + LEFT_EDGE : RETURN
+    CY = BV + T1(T) + U1(T) : CX = T * CARD_WIDTH + LEFT_EDGE : RETURN
 
 .tryPlayOnFoundation
-	OK = 0
-	IF F1(F) = 0 AND CARD < 4 THEN GOTO .validFoundationMove
-	IF F1(F) = 0 AND CARD >= 4 THEN RETURN
-	FC = F(F,F1(F)-1)
-	IF FC-(INT(FC/4)*4) = CARD-(INT(CARD/4)*4) AND INT(FC/4) = INT(CARD/4)-1 THEN GOTO .validFoundationMove
-	RETURN
+    OK = 0
+    IF F1(F) = 0 AND CARD < 4 THEN GOTO .validFoundationMove
+    IF F1(F) = 0 AND CARD >= 4 THEN RETURN
+    FC = F(F,F1(F)-1)
+    IF FC-(INT(FC/4)*4) = CARD-(INT(CARD/4)*4) AND INT(FC/4) = INT(CARD/4)-1 THEN GOTO .validFoundationMove
+    RETURN
 .validFoundationMove
-	OK = 1
-	GOSUB .placeOnFoundation
-	GOSUB .renderFoundation
-	IF CURSOR <> CR_TABLEAU THEN RETURN
-	U1(CT) = U1(CT) - 1 : GOSUB .tryFlipTableau
-	RETURN
+    OK = 1
+    GOSUB .placeOnFoundation
+    GOSUB .renderFoundation
+    IF CURSOR <> CR_TABLEAU THEN RETURN
+    U1(CT) = U1(CT) - 1 : GOSUB .tryFlipTableau
+    RETURN
 
 .playOnTableau
-	OK = 0
-	IF CR=CR_TABLEAU AND T=CT THEN OK=1: GOSUB .setCardColor : GOSUB .drawCursor : NORMAL : RETURN
-	IF U1(T)<>0 THEN GOTO .tableauNotEmpty
-		IF CARD_TYPE = KING THEN GOSUB .playAndRenderOnTableau : RETURN
-		IF CARD_TYPE < KING THEN RETURN
-	.tableauNotEmpty
-	TG = U(T,U1(T)-1)
-	IF (TG-(INT(TG/2)*2) <> CARD-(INT(CARD/2)*2)) AND INT(TG/4)=CARD_TYPE+1 THEN GOSUB .playAndRenderOnTableau
-	RETURN
+    OK = 0
+    IF CR=CR_TABLEAU AND T=CT THEN OK=1: GOSUB .setCardColor : GOSUB .drawCursor : NORMAL : RETURN
+    IF U1(T)<>0 THEN GOTO .tableauNotEmpty
+        IF CARD_TYPE = KING THEN GOSUB .playAndRenderOnTableau : RETURN
+        IF CARD_TYPE < KING THEN RETURN
+    .tableauNotEmpty
+    TG = U(T,U1(T)-1)
+    IF (TG-(INT(TG/2)*2) <> CARD-(INT(CARD/2)*2)) AND INT(TG/4)=CARD_TYPE+1 THEN GOSUB .playAndRenderOnTableau
+    RETURN
 
 .playAndRenderOnTableau
-	OK = 1
-	IF CURSOR = CR_TABLEAU THEN GOTO .handleStackMove
-	GOSUB .placeFaceUp
-	VTAB BV+T1(T)+U1(T)-1 : HTAB T*CARD_WIDTH+LEFT_EDGE
-	GOSUB .renderCard
-	GOSUB .tryFlipTableau
-	RETURN
+    OK = 1
+    IF CURSOR = CR_TABLEAU THEN GOTO .handleStackMove
+    GOSUB .placeFaceUp
+    VTAB BV+T1(T)+U1(T)-1 : HTAB T*CARD_WIDTH+LEFT_EDGE
+    GOSUB .renderCard
+    GOSUB .tryFlipTableau
+    RETURN
 
 .handleStackMove
-	IF T = CT THEN GOSUB .renderTableau : RETURN
-	FOR N= 0 TO CARD_POS
-		CARD = U(CT,U1(CT)-1- CARD_POS +N)
-		VTAB BV + T1(T) + U1(T) : HTAB LEFT_EDGE + CARD_WIDTH * T
-		GOSUB .renderCard
-		GOSUB .placeFaceUp
-		VTAB BV + T1(CT) + U1(CT) - CARD_POS + N - 1 : HTAB LEFT_EDGE + CARD_WIDTH * CT
-		PRINT BLANK_STR
-	NEXT
-	U1(CT) = U1(CT) - CARD_POS - 1
-	GOSUB .tryFlipTableau
-	RETURN
+    IF T = CT THEN GOSUB .renderTableau : RETURN
+    FOR N= 0 TO CARD_POS
+        CARD = U(CT,U1(CT)-1- CARD_POS +N)
+        VTAB BV + T1(T) + U1(T) : HTAB LEFT_EDGE + CARD_WIDTH * T
+        GOSUB .renderCard
+        GOSUB .placeFaceUp
+        VTAB BV + T1(CT) + U1(CT) - CARD_POS + N - 1 : HTAB LEFT_EDGE + CARD_WIDTH * CT
+        PRINT BLANK_STR
+    NEXT
+    U1(CT) = U1(CT) - CARD_POS - 1
+    GOSUB .tryFlipTableau
+    RETURN
 
 .tryFlipTableau
-	IF DROP_CURSOR = CR_TABLEAU AND T = CT THEN RETURN
-	IF U1(CT)>0 OR T1(CT)=0 THEN RETURN
-	CARD = T(CT, T1(CT)-1)
-	T1(CT) = T1(CT) - 1
-	U(CT,U1(CT))=CARD:U1(CT)=U1(CT)+1
-	VTAB BV + T1(CT) : HTAB LEFT_EDGE + CARD_WIDTH * CT
-	GOSUB .renderCard
-	RETURN
+    IF DROP_CURSOR = CR_TABLEAU AND T = CT THEN RETURN
+    IF U1(CT)>0 OR T1(CT)=0 THEN RETURN
+    CARD = T(CT, T1(CT)-1)
+    T1(CT) = T1(CT) - 1
+    U(CT,U1(CT))=CARD:U1(CT)=U1(CT)+1
+    VTAB BV + T1(CT) : HTAB LEFT_EDGE + CARD_WIDTH * CT
+    GOSUB .renderCard
+    RETURN
 
 .initialize
-	DIM T(TMAX,TMAX),T1(TMAX),U(TMAX,12),U1(TMAX),STOCK(CARDMAX),HAND(23),F(FMAX,12),F1(FMAX),IT(CARDMAX)
-	CARD$="A 2 3 4 5 6 7 8 9 10J Q K ":SUIT$="SPHTCLDI"
-	TV=3:BV=6
-	RETURN
+    DIM T(TMAX,TMAX),T1(TMAX),U(TMAX,12),U1(TMAX),STOCK(CARDMAX),HAND(23),F(FMAX,12),F1(FMAX),IT(CARDMAX)
+    CARD$="A 2 3 4 5 6 7 8 9 10J Q K ":SUIT$="SPHTCLDI"
+    TV=3:BV=6
+    RETURN
 
 .checkWin
     REM FORN=0TO3:F1(N)=13:FORM=0TO12:F(N,M)=M*4+N:NEXT:NEXT
@@ -474,7 +474,8 @@ REM ***********************************
     DID_WIN = 1
     RETURN
 
-#DEFINE CPRINT(TXT) CENTER_TXT$ = TXT : GOSUB .centerText
+#define CPRINT(TXT) CENTER_TXT$ = TXT : GOSUB .centerText
+
 .titleScreen
     TEXT
     HOME
