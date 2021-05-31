@@ -39,7 +39,6 @@ REM By Lee Fastenau
 REM T/T1 = Tableau Face Down
 REM U/U1 = Tableau Face Up
 REM F/F1 = Foundation
-REM IT = Integrity Test Deck
 
 GOSUB .initialize
 
@@ -216,7 +215,7 @@ REM ***********************************
     IF K = 21 THEN GOSUB .cursorRight : GOTO .selectCard
     IF K = 11 OR K = 65 THEN GOSUB .cursorUp : GOTO .selectCard
     IF K = 10 OR K = 90 THEN GOSUB .cursorDown : GOTO .selectCard
-    IF K = 32 THEN CT = T : CF = F : RETURN
+    IF K = 32 THEN CT = T : RETURN
     GOTO .selectCard
 
 .cursorLeft
