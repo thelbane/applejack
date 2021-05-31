@@ -1,0 +1,3 @@
+print "include.txt: Line 1"
+#include "simple.txt"
+print "include.txt: Line 2"

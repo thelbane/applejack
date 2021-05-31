@@ -1,0 +1,2 @@
+print "simple.txt: Line 1"
+print "simple.txt: Line 2"

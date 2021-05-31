@@ -1,0 +1,3 @@
+print "nested_include.txt: Line 1"
+#include "include.txt"
+print "nested_include.txt: Line 2"

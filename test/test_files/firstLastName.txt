@@ -1,0 +1,4 @@
+#DEFINE FIRST_NAME firstName$
+#DEFINE LAST_NAME lastName$
+firstName$ = 'Steve'
+lastName$ = 'Wozniak'

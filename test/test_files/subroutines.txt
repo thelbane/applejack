@@ -1,0 +1,14 @@
+#DEFINE STRENGTH st
+
+.printName
+    print "Your name is: "; name$
+    return
+
+.printStrength
+    print "Strength: "; strength$
+    return
+
+.printStats
+    gosub .printName
+    gosub .printStrength
+    return
