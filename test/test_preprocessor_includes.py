@@ -14,7 +14,7 @@ print
         self.assertEqual(expected, actual)
 
     def test_include(self):
-        folders = ["test/test_files"]
+        folders = ["test_files"]
         program = """
 #include "simple.txt"
 """
@@ -26,7 +26,7 @@ print "simple.txt: Line 2"
         self.assertEqual(expected, actual)
 
     def test_include_twice(self):
-        folders = ["test/test_files"]
+        folders = ["test_files"]
         program = """
 #include "simple.txt"
 #include "simple.txt"
@@ -41,7 +41,7 @@ print "simple.txt: Line 2"
         self.assertEqual(expected, actual)
 
     def test_nested_includes(self):
-        folders = ["test/test_files"]
+        folders = ["test_files"]
         program = """
 #include "nested_include.txt"
 """
@@ -70,14 +70,14 @@ print "nested_include.txt: Line 2"
         self.assertEqual(expected, actual)
 
     def test_circular_reference(self):
-        folders = ["test/test_files"]
+        folders = ["test_files"]
         program = """
 #include "circular_a_include.txt"
 """
         with self.assertRaises(Exception) as context:
             preprocessor.parse(program, folders)
 
-        expected = 'Circular include reference detected (test/test_files/circular_a_include.txt)'
+        expected = 'Circular include reference detected (test_files/circular_a_include.txt)'
         actual = str(context.exception)
 
         self.assertEqual(expected, actual)

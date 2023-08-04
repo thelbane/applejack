@@ -8,7 +8,7 @@ import transpiler
 class TestIntegration(unittest.TestCase):
 
     def test_include_rename(self):
-        folders = ["test/test_files"]
+        folders = ["test_files"]
         program = """
 REM ** TEST
 #INCLUDE "firstLastName.txt"
@@ -28,7 +28,7 @@ print l$;", ";f$
         self.assertEqual(expected, actual)
 
     def test_subroutines(self):
-        folders = ["test/test_files"]
+        folders = ["test_files"]
         program = """
 REM ** TEST
 #INCLUDE "subroutines.txt"
