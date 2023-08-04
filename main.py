@@ -28,6 +28,6 @@ def jackup(filename, output_file):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    jackup('klondike.txt', 'klondike_output.txt')
+    jackup('samples/klondike/klondike.txt', 'samples/klondike/klondike_output.txt')
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
