@@ -1,0 +1,5 @@
+#define DSK CHR$(4)
+
+.load
+    PRINT DSK"OPEN"filename$
+    RETURN

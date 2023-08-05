@@ -11,10 +11,10 @@ from transpiler import Transpiler
 import subprocess
 
 
-def jackup(filename, output_file):
+def jackup(filename, output_file, paths = []):
     program = get_file_contents(filename)
     transpiler = Transpiler(program)
-    transpiler.parse_directives([])
+    transpiler.parse_directives(paths)
     transpiler.cleanup_all(True)
     transpiler.optimize_variables()
     transpiler.finalize(0, 1)
@@ -28,6 +28,7 @@ def jackup(filename, output_file):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    jackup('samples/klondike/klondike.txt', 'samples/klondike/klondike_output.txt')
+#    jackup('samples/klondike/klondike.txt', 'samples/klondike/klondike_output.txt')
+    jackup('samples/continuity/continuity.txt', 'samples/continuity/continuity_output.txt', ['samples/continuity'])
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

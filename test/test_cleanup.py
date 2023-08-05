@@ -8,7 +8,7 @@ class TestCleanup(unittest.TestCase):
     def test_remove_full_comment(self):
         program = """
 REM This should go away
-rem ...and this too
+REM ...and this too
 """
         expected = """
 
@@ -21,12 +21,12 @@ rem ...and this too
 
     def test_remove_partial_comment(self):
         program = """
-goto .end: REM This should go away
-rem ...and this too
+GOTO .end: REM This should go away
+REM ...and this too
 .end
 """
         expected = """
-goto .end: 
+GOTO .end: 
 
 .end
 """
@@ -37,10 +37,10 @@ goto .end:
 
     def test_leave_quoted_rem(self):
         program = """
-print "rem test"
+print "REM test"
 """
         expected = """
-print "rem test"
+print "REM test"
 """
         transpiler = Transpiler(program)
         transpiler.cleanup_comments()
@@ -49,18 +49,18 @@ print "rem test"
 
     def test_cleanup_goto(self):
         program = """
-goto .end: print "hello"
-on x goto .label1, .label2, .label13: print "goodbye"
-print "goto 10": rem Test
+GOTO .end: PRINT "hello"
+ON x GOTO .label1, .label2, .label13: print "goodbye"
+PRINT "goto 10": REM Test
 .end
 .label1
 .label2
 .label3
 """
         expected = """
-goto .end
-on x goto .label1, .label2, .label13
-print "goto 10": rem Test
+GOTO .end
+ON x GOTO .label1, .label2, .label13
+PRINT "goto 10": REM Test
 .end
 .label1
 .label2
@@ -73,14 +73,14 @@ print "goto 10": rem Test
 
     def test_cleanup_end(self):
         program = """
-end : goto .foo
-print "end : goto .foo"
-end it all
+END : GOTO .foo
+PRINT "end : GOTO .foo"
+END it all
 """
         expected = """
-end
-print "end : goto .foo"
-end
+END
+PRINT "end : GOTO .foo"
+END
 """
         transpiler = Transpiler(program)
         transpiler.cleanup_end()
@@ -105,9 +105,9 @@ text : home
 
     def test_collapse_whitespace(self):
         program = """
- text : home : rem *** test ***
+ TEXT : HOME : REM *** test ***
 """
-        expected = """text:home:rem *** test ***
+        expected = """TEXT:HOME:REM *** test ***
 """
         transpiler = Transpiler(program)
         transpiler.collapse_whitespace()

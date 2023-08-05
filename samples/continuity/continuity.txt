@@ -1,0 +1,16 @@
+REM Continuity
+REM An Applejack sample application by Lee Fastenau
+
+#define MAX_TODO 100
+#define MAX_NOTE 100
+
+GOSUB .init
+GOSUB .load
+PRINT "THE END!"
+END
+
+.init
+    DIM todo$(MAX_TODO), note$(MAX_NOTE)
+    RETURN
+
+#include "includes/filesystem.txt"

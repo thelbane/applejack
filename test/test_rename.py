@@ -8,7 +8,7 @@ class TestRename(unittest.TestCase):
         program = inspect.cleandoc("""
             10 PRINT a$; : REM Hello friend
             20 TEXT: HOME
-            30 DIM AB$(100),x(10),y(10): goto 10
+            30 DIM AB$(100),x(10),y(10): GOTO 10
             40 HPLOT x, y
             50 FORQQ=XXTOYYSTEPZZ
             60 Q1 = 5
