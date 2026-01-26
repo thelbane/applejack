@@ -15,6 +15,10 @@ so that I can navigate and extend the compiler consistently.
 3. `tests/` and `tests/fixtures/` exist and follow `test_*.py` naming conventions.
 4. CLI entrypoint stubs exist at `src/applejack/cli.py` and `src/applejack/__main__.py`.
 5. All paths and names align with the architecture document.
+6. All new modules are stubs only (no runtime logic beyond minimal placeholders).
+7. No existing files are modified except to add the new scaffolded structure.
+8. No database, auth, or security model is introduced in this story.
+9. Performance constraints are out of scope for scaffolding and should not be implemented here.
 
 ## Tasks / Subtasks
 
@@ -27,12 +31,12 @@ so that I can navigate and extend the compiler consistently.
   - [ ] `config.py`
   - [ ] `errors.py`
   - [ ] `lexer/`, `parser/`, `preprocessor/`, `transformer/`, `generator/`, `diagnostics/`, `utils/` (each with `__init__.py`)
-  - [ ] Placeholder modules: `lexer/tokens.py`, `parser/grammar_loader.py`, `parser/parse.py`, `parser/ast.py`,
+  - [ ] Placeholder modules (stub-only; no runtime logic): `lexer/tokens.py`, `parser/grammar_loader.py`, `parser/parse.py`, `parser/ast.py`,
         `preprocessor/includes.py`, `preprocessor/macros.py`, `transformer/transform.py`, `generator/generate.py`,
         `diagnostics/reporter.py`, `utils/io.py`
 - [ ] Add `tests/` skeleton with placeholder files: `test_grammar.py`, `test_parser.py`, `test_preprocessor.py`,
       `test_transformer.py`, `test_generator.py`, `test_cli.py`, and `tests/fixtures/`.
-- [ ] Add `.github/workflows/ci.yml` stub to be finalized in Story 1.3.
+- [ ] Add `.github/workflows/ci.yml` stub only (placeholder to be finalized in Story 1.3).
 
 ## Dev Notes
 
@@ -40,12 +44,15 @@ so that I can navigate and extend the compiler consistently.
 - This story is about scaffolding only; no feature implementations or parsing logic.
 - Keep modules empty or with minimal stubs that do not enforce behavior.
 - Hybrid CLI I/O is the architectural direction, but no runtime logic is needed here.
+- Do not invent new structure beyond `docs/architecture.md`.
 
 ### Technical Requirements
 - Language: Python 3.9+.
 - Follow PEP 8 naming conventions (snake_case, PascalCase, UPPER_SNAKE_CASE).
 - Keep filesystem I/O limited to CLI boundary and `utils/io.py` per architecture.
 - Errors should be raised internally and caught at the CLI boundary (no stdout errors).
+- No database, auth, or security model is added in this story.
+- Performance constraints are out of scope for scaffolding-only work.
 
 ### Architecture Compliance
 - Maintain strict boundaries: Preprocessor → Parser → Transformer → Generator, no cross-layer imports.
@@ -66,6 +73,9 @@ so that I can navigate and extend the compiler consistently.
 - Provide empty test modules as placeholders; no tests required in this story.
 - Use `test_*.py` naming in `tests/`.
 
+### CI / Deployment Notes
+- CI file is a stub only in this story; do not finalize workflow steps until Story 1.3.
+
 ### Latest Tech Information
 - Verify version pins before changing any tooling (current pins are from architecture).
 
@@ -76,6 +86,7 @@ so that I can navigate and extend the compiler consistently.
 
 - Alignment target is the architecture tree; deviations require explicit rationale.
 - CLI stubs should exist but remain thin until Story 1.2.
+- This story should not modify any existing files beyond adding the scaffold.
 
 ### References
 
