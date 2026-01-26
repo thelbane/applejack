@@ -1,0 +1,1 @@
+"""Token definitions (stub)."""

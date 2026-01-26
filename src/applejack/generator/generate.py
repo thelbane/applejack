@@ -1,0 +1,1 @@
+"""Code generation pipeline (stub)."""

@@ -1,6 +1,6 @@
 # Story 1.1: Scaffold Project Structure
 
-Status: ready-for-dev
+Status: Ready for Review
 
 ## Story
 
@@ -22,21 +22,21 @@ so that I can navigate and extend the compiler consistently.
 
 ## Tasks / Subtasks
 
-- [ ] Create root structure files: `README.md`, `LICENSE`, `.gitignore`, `pyproject.toml`.
-- [ ] Create directories: `src/applejack/`, `grammar/`, `tests/`, `.github/workflows/`.
-- [ ] Add package skeleton under `src/applejack/`:
-  - [ ] `__init__.py`
-  - [ ] `__main__.py` (CLI stub)
-  - [ ] `cli.py` (CLI stub)
-  - [ ] `config.py`
-  - [ ] `errors.py`
-  - [ ] `lexer/`, `parser/`, `preprocessor/`, `transformer/`, `generator/`, `diagnostics/`, `utils/` (each with `__init__.py`)
-  - [ ] Placeholder modules (stub-only; no runtime logic): `lexer/tokens.py`, `parser/grammar_loader.py`, `parser/parse.py`, `parser/ast.py`,
+- [x] Create root structure files: `README.md`, `LICENSE`, `.gitignore`, `pyproject.toml`.
+- [x] Create directories: `src/applejack/`, `grammar/`, `tests/`, `.github/workflows/`.
+- [x] Add package skeleton under `src/applejack/`:
+  - [x] `__init__.py`
+  - [x] `__main__.py` (CLI stub)
+  - [x] `cli.py` (CLI stub)
+  - [x] `config.py`
+  - [x] `errors.py`
+  - [x] `lexer/`, `parser/`, `preprocessor/`, `transformer/`, `generator/`, `diagnostics/`, `utils/` (each with `__init__.py`)
+  - [x] Placeholder modules (stub-only; no runtime logic): `lexer/tokens.py`, `parser/grammar_loader.py`, `parser/parse.py`, `parser/ast.py`,
         `preprocessor/includes.py`, `preprocessor/macros.py`, `transformer/transform.py`, `generator/generate.py`,
         `diagnostics/reporter.py`, `utils/io.py`
-- [ ] Add `tests/` skeleton with placeholder files: `test_grammar.py`, `test_parser.py`, `test_preprocessor.py`,
+- [x] Add `tests/` skeleton with placeholder files: `test_grammar.py`, `test_parser.py`, `test_preprocessor.py`,
       `test_transformer.py`, `test_generator.py`, `test_cli.py`, and `tests/fixtures/`.
-- [ ] Add `.github/workflows/ci.yml` stub only (placeholder to be finalized in Story 1.3).
+- [x] Add `.github/workflows/ci.yml` stub only (placeholder to be finalized in Story 1.3).
 
 ## Dev Notes
 
@@ -106,12 +106,45 @@ gpt-5.2-codex
 
 ### Debug Log References
 
-- None.
+- 2026-01-26: Scaffolded Story 1.1 directories/files.
+- 2026-01-26: Installed `pytest` with trusted-host flags; ran `PYTHONPATH=src .venv/bin/pytest`.
 
 ### Completion Notes List
 
 - Ultimate context engine analysis completed - comprehensive developer guide created.
+- Scaffold placeholders added per Story 1.1.
+- Tests: `PYTHONPATH=src .venv/bin/pytest`.
+
+## Change Log
+
+- 2026-01-26: Scaffolded project structure and placeholder modules/tests for Story 1.1.
 
 ### File List
 
 - `docs/sprint-artifacts/1-1-scaffold-project-structure.md`
+- `docs/sprint-artifacts/sprint-status.yaml`
+- `src/applejack/config.py`
+- `src/applejack/errors.py`
+- `src/applejack/diagnostics/__init__.py`
+- `src/applejack/diagnostics/reporter.py`
+- `src/applejack/generator/__init__.py`
+- `src/applejack/generator/generate.py`
+- `src/applejack/lexer/__init__.py`
+- `src/applejack/lexer/tokens.py`
+- `src/applejack/parser/__init__.py`
+- `src/applejack/parser/ast.py`
+- `src/applejack/parser/grammar_loader.py`
+- `src/applejack/parser/parse.py`
+- `src/applejack/preprocessor/__init__.py`
+- `src/applejack/preprocessor/includes.py`
+- `src/applejack/preprocessor/macros.py`
+- `src/applejack/transformer/__init__.py`
+- `src/applejack/transformer/transform.py`
+- `src/applejack/utils/__init__.py`
+- `src/applejack/utils/io.py`
+- `tests/fixtures/.gitkeep`
+- `tests/test_generator.py`
+- `tests/test_grammar.py`
+- `tests/test_parser.py`
+- `tests/test_preprocessor.py`
+- `tests/test_transformer.py`

@@ -1,0 +1,1 @@
+"""AST transformation pipeline (stub)."""

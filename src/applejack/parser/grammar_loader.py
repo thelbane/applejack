@@ -1,0 +1,1 @@
+"""Grammar loading utilities (stub)."""
