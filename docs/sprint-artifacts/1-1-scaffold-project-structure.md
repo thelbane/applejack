@@ -1,6 +1,6 @@
 # Story 1.1: Scaffold Project Structure
 
-Status: Ready for Review
+Status: done
 
 ## Story
 
@@ -80,7 +80,7 @@ so that I can navigate and extend the compiler consistently.
 - Verify version pins before changing any tooling (current pins are from architecture).
 
 ### Project Context Reference
-- No `project-context.md` found in repo.
+- `docs/project_context.md` present; follow its rules.
 
 ## Project Structure Notes
 
@@ -108,43 +108,24 @@ gpt-5.2-codex
 
 - 2026-01-26: Scaffolded Story 1.1 directories/files.
 - 2026-01-26: Installed `pytest` with trusted-host flags; ran `PYTHONPATH=src .venv/bin/pytest`.
+- 2026-01-26: Review fixes: CI workflow stubbed; fixtures subdirs added.
 
 ### Completion Notes List
 
 - Ultimate context engine analysis completed - comprehensive developer guide created.
 - Scaffold placeholders added per Story 1.1.
 - Tests: `PYTHONPATH=src .venv/bin/pytest`.
+- Review fixes applied; tests rerun.
 
 ## Change Log
 
 - 2026-01-26: Scaffolded project structure and placeholder modules/tests for Story 1.1.
+- 2026-01-26: Review fixes — CI workflow stubbed; fixtures subdirs created.
 
 ### File List
 
+- `.github/workflows/ci.yml`
 - `docs/sprint-artifacts/1-1-scaffold-project-structure.md`
 - `docs/sprint-artifacts/sprint-status.yaml`
-- `src/applejack/config.py`
-- `src/applejack/errors.py`
-- `src/applejack/diagnostics/__init__.py`
-- `src/applejack/diagnostics/reporter.py`
-- `src/applejack/generator/__init__.py`
-- `src/applejack/generator/generate.py`
-- `src/applejack/lexer/__init__.py`
-- `src/applejack/lexer/tokens.py`
-- `src/applejack/parser/__init__.py`
-- `src/applejack/parser/ast.py`
-- `src/applejack/parser/grammar_loader.py`
-- `src/applejack/parser/parse.py`
-- `src/applejack/preprocessor/__init__.py`
-- `src/applejack/preprocessor/includes.py`
-- `src/applejack/preprocessor/macros.py`
-- `src/applejack/transformer/__init__.py`
-- `src/applejack/transformer/transform.py`
-- `src/applejack/utils/__init__.py`
-- `src/applejack/utils/io.py`
-- `tests/fixtures/.gitkeep`
-- `tests/test_generator.py`
-- `tests/test_grammar.py`
-- `tests/test_parser.py`
-- `tests/test_preprocessor.py`
-- `tests/test_transformer.py`
+- `tests/fixtures/applesoft/.gitkeep`
+- `tests/fixtures/edge_cases/.gitkeep`
