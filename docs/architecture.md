@@ -51,8 +51,8 @@ Phase 3 completes the compiler pipeline with preprocessing, AST transformation, 
 - Deterministic output and stable transformations
 
 ### ADR Candidates (Decisions to Formalize Early)
-- **ADR-001 Parser Strategy:** Lark Earley vs LALR, ambiguity handling, and error recovery strategy
-- **ADR-002 AST Shape:** Unified AST across phases vs phase-specific ASTs with adapters
+- **ADR-001 Parser Strategy:** **Lark Earley** for ambiguity tolerance and safer parsing of Applesoft edge cases
+- **ADR-002 AST Shape:** **Single canonical AST** with extension nodes/annotations for Phase 2 features
 - **ADR-003 Preprocessing Order:** Macro expansion vs include resolution vs label mapping order
 - **ADR-004 Variable Optimization:** Frequency-based renaming algorithm and collision avoidance rules
 - **ADR-005 Output Formatting:** Line-number assignment strategy and formatting stability guarantees
@@ -151,6 +151,12 @@ python -m pip install --upgrade pip setuptools
 - **Distribution:** PyPI (install via `pip` or `pipx`).
 - **Versioning:** Semantic Versioning (SemVer).
 - **Optional future:** Single-file binaries via PyInstaller (deferred).
+
+### Version Pinning (Implementation Baseline)
+- **Python:** 3.9.6
+- **Lark:** 1.1.9
+- **pytest:** 8.2.2
+- **GitHub Actions:** `actions/checkout@v4`, `actions/setup-python@v5`
 
 ## Implementation Patterns & Consistency Rules
 

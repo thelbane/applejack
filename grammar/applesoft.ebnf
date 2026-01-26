@@ -1,0 +1,70 @@
+// Applesoft BASIC (1978) strict grammar - initial stub
+// This file will be expanded to cover the full specification in
+// docs/phase-1-applesoft-grammar-spec.md.
+
+// ------------------------
+// Lexer / Terminals
+// ------------------------
+
+// Case-insensitive keywords should be handled via parser config.
+
+%import common.INT
+%import common.FLOAT
+%import common.WS_INLINE
+%import common.NEWLINE
+
+%ignore WS_INLINE
+
+// ------------------------
+// Parser / Non-terminals
+// ------------------------
+
+start: program
+
+program: line*
+
+line: line_number statement_list? NEWLINE?
+
+line_number: INT | FLOAT   // floats are truncated to integers at runtime
+
+statement_list: statement (":" statement)*
+
+statement: rem_statement
+         | print_statement
+         | assignment_statement
+         | control_statement
+
+rem_statement: "REM" /.+/?
+
+print_statement: ("PRINT" | "?") print_args?
+
+print_args: expr (print_sep expr)* print_trailing?
+print_sep: ";" | ","
+print_trailing: ";" | ","
+
+assignment_statement: ["LET"] variable "=" expr
+
+control_statement: "END"
+                 | "STOP"
+                 | "CONT"
+                 | "GOTO" line_number
+                 | "GOSUB" line_number
+                 | "RETURN"
+
+expr: term
+    | expr "+" term
+    | expr "-" term
+
+term: factor
+    | term "*" factor
+    | term "/" factor
+
+factor: number
+      | variable
+      | "(" expr ")"
+
+number: FLOAT | INT
+
+variable: NAME
+
+NAME: /[A-Z][A-Z0-9]{0,237}/

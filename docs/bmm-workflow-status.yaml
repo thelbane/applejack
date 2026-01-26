@@ -81,7 +81,7 @@ workflow_status:
         note: "Complete system design for greenfield projects"
       create-epics-and-stories:
         id: "create-epics-and-stories"
-        status: "required"
+        status: "docs/epics.md"
         agent: "pm"
         command: "create-epics-and-stories"
         note: "Required: Break down PRD into implementable epics and stories with full context (PRD + UX + Architecture)"
@@ -100,7 +100,7 @@ workflow_status:
         note: "Quality check for architecture completeness"
       implementation-readiness:
         id: "implementation-readiness"
-        status: "required"
+        status: "docs/implementation-readiness-report-2026-01-25.md"
         agent: "architect"
         command: "implementation-readiness"
         note: "Validates PRD + UX + Architecture + Epics + Testability cohesion before implementation"

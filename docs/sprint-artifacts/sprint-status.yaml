@@ -1,0 +1,72 @@
+# generated: 2026-01-25
+# project: Applejack
+# project_key: applejack
+# tracking_system: file-system
+# story_location: docs/sprint-artifacts
+#
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic exists in epic file but not contexted
+#   - contexted: Epic tech context created (required before drafting stories)
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - drafted: Story file created in stories folder
+#   - ready-for-dev: Draft approved and story context created
+#   - in-progress: Developer actively working on implementation
+#   - review: Under SM review (via code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - completed: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epics should be 'contexted' before stories can be 'drafted'
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically drafts next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', SM reviews, then Dev moves to 'done'
+
+generated: 2026-01-25
+project: Applejack
+project_key: applejack
+tracking_system: file-system
+story_location: docs/sprint-artifacts
+
+development_status:
+  epic-1: backlog
+  1-1-scaffold-project-structure: backlog
+  1-2-cli-skeleton-with-argparse: backlog
+  1-3-ci-gate-with-pytest: backlog
+  1-4-decide-parser-strategy-ast-shape: backlog
+  epic-1-retrospective: optional
+
+  epic-2: backlog
+  2-1-implement-applesoft-ebnf: backlog
+  2-2-grammar-loader-parser-wiring: backlog
+  2-3-canonical-ast-model: backlog
+  epic-2-retrospective: optional
+
+  epic-3: backlog
+  3-1-diagnostics-reporter: backlog
+  3-2-sample-program-validation: backlog
+  3-3-edge-case-test-suite: backlog
+  3-4-golden-ast-fixtures: backlog
+  epic-3-retrospective: optional
+
+  epic-4: backlog
+  4-1-macro-expansion: backlog
+  4-2-include-directives: backlog
+  4-3-label-support: backlog
+  4-4-long-variable-names: backlog
+  4-5-unicode-string-literals: backlog
+  epic-4-retrospective: optional
+
+  epic-5: backlog
+  5-1-transformer-pipeline: backlog
+  5-2-code-generator: backlog
+  5-3-cli-compile-command: backlog
+  5-4-end-to-end-validation: backlog
+  epic-5-retrospective: optional
