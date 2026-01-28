@@ -1,6 +1,6 @@
 # Story 1.2: CLI Skeleton with argparse
 
-Status: Ready for Review
+Status: done
 Story Key: 1-2-cli-skeleton-with-argparse
 Epic: 1 (Foundation & Developer Workflow)
 Prerequisites: 1.1 (done)
@@ -90,7 +90,7 @@ so that I can invoke parsing and validation from the terminal.
 - Keep CLI behavior minimal and predictable (no hidden defaults).
 
 ### Story Completion Status
-- Status: Ready for Review
+- Status: done
 - Completion note: Ultimate context engine analysis completed - comprehensive developer guide created.
 
 ### Previous Story Intelligence
@@ -135,17 +135,21 @@ gpt-5.2-codex
 ### Debug Log References
 - 2026-01-26: Story 1.2 context generated (create-story workflow).
 - 2026-01-27: Added CLI subcommands, explicit error path, and CLI tests; ran pytest after fixing Python 3.9 type hints.
+- 2026-01-27: Code review fixes applied (console script fallback, parse/validate stub errors, gitignore updates).
 
 ### Completion Notes List
 - Ultimate context engine analysis completed - comprehensive developer guide created.
 - Implemented argparse subcommands with explicit missing-command error path; updated CLI tests for help/version/error; pytest passing.
+- Code review fixes: avoid silent success on stub commands, prefer console script when available, ignore build artifacts, added tests.
 
 ### File List
 - `docs/sprint-artifacts/1-2-cli-skeleton-with-argparse.md`
 - `docs/sprint-artifacts/sprint-status.yaml`
+- `.gitignore`
 - `src/applejack/cli.py`
 - `tests/test_cli.py`
 
 ## Change Log
 
 - 2026-01-27: Added minimal CLI subcommands and explicit error path; expanded CLI tests; updated story status.
+- 2026-01-27: Review fixes: console script fallback, stub command errors, gitignore for artifacts, test assertions.

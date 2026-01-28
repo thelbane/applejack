@@ -36,6 +36,8 @@ def main(argv: Optional[List[str]] = None) -> int:
         args = parser.parse_args(argv)
         if args.command is None:
             parser.error("missing command")
+        if args.command in {"parse", "validate"}:
+            parser.error(f"{args.command} not implemented yet")
         return 0
     except SystemExit as exc:
         return exc.code if isinstance(exc.code, int) else 1
