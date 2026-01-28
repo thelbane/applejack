@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: applejack
+Version: 0.1.0
+Summary: Applejack V2 Applesoft BASIC compiler
+Requires-Python: ==3.9.6
+License-File: LICENSE
+Requires-Dist: lark==1.1.9
+Provides-Extra: dev
+Requires-Dist: pytest==8.2.2; extra == "dev"

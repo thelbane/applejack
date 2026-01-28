@@ -1,6 +1,6 @@
 # Story 1.2: CLI Skeleton with argparse
 
-Status: ready-for-dev
+Status: Ready for Review
 Story Key: 1-2-cli-skeleton-with-argparse
 Epic: 1 (Foundation & Developer Workflow)
 Prerequisites: 1.1 (done)
@@ -20,12 +20,12 @@ so that I can invoke parsing and validation from the terminal.
 
 ## Tasks / Subtasks
 
-- [ ] Implement CLI argument parser in `src/applejack/cli.py` (AC: 1, 2, 3)
-  - [ ] Wire `--help` and `--version` flags
-  - [ ] Ensure `main()` returns exit codes
-- [ ] Ensure module entrypoint calls `main()` in `src/applejack/__main__.py` (AC: 1, 2)
-- [ ] Add/adjust tests in `tests/test_cli.py` for help/version output (AC: 1, 2)
-- [ ] Add error handling path that writes to stderr and uses non-zero exit (AC: 4)
+- [x] Implement CLI argument parser in `src/applejack/cli.py` (AC: 1, 2, 3)
+  - [x] Wire `--help` and `--version` flags
+  - [x] Ensure `main()` returns exit codes
+- [x] Ensure module entrypoint calls `main()` in `src/applejack/__main__.py` (AC: 1, 2)
+- [x] Add/adjust tests in `tests/test_cli.py` for help/version output (AC: 1, 2)
+- [x] Add error handling path that writes to stderr and uses non-zero exit (AC: 4)
 
 ## Dev Notes
 
@@ -90,7 +90,7 @@ so that I can invoke parsing and validation from the terminal.
 - Keep CLI behavior minimal and predictable (no hidden defaults).
 
 ### Story Completion Status
-- Status: ready-for-dev
+- Status: Ready for Review
 - Completion note: Ultimate context engine analysis completed - comprehensive developer guide created.
 
 ### Previous Story Intelligence
@@ -128,12 +128,24 @@ so that I can invoke parsing and validation from the terminal.
 ### Agent Model Used
 gpt-5.2-codex
 
+### Implementation Plan
+- Extend `build_parser()` with minimal subcommands and explicit missing-command error path; keep CLI boundary behavior.
+- Add CLI tests for `--help`, `--version`, and missing-command stderr + exit code 2.
+
 ### Debug Log References
 - 2026-01-26: Story 1.2 context generated (create-story workflow).
+- 2026-01-27: Added CLI subcommands, explicit error path, and CLI tests; ran pytest after fixing Python 3.9 type hints.
 
 ### Completion Notes List
 - Ultimate context engine analysis completed - comprehensive developer guide created.
+- Implemented argparse subcommands with explicit missing-command error path; updated CLI tests for help/version/error; pytest passing.
 
 ### File List
 - `docs/sprint-artifacts/1-2-cli-skeleton-with-argparse.md`
 - `docs/sprint-artifacts/sprint-status.yaml`
+- `src/applejack/cli.py`
+- `tests/test_cli.py`
+
+## Change Log
+
+- 2026-01-27: Added minimal CLI subcommands and explicit error path; expanded CLI tests; updated story status.
