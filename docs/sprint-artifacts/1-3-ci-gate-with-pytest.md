@@ -16,8 +16,8 @@ so that regressions are caught early.
 
 - [x] Update `.github/workflows/ci.yml` to run pytest on push/PR (AC: 1)
   - [x] Use `actions/checkout@v4` and `actions/setup-python@v5`
-  - [x] Use Python 3.9.6 and install `.[dev]` deps
-  - [x] Run `python3.9 -m pytest` and fail on non-zero exit
+  - [x] Use Python 3.9 and install `.[dev]` deps
+  - [x] Run `python -m pytest` and fail on non-zero exit
 - [x] Ensure CI does not introduce extra tooling (AC: 1)
 - [x] Add/adjust tests only if needed for CI validation (AC: 1)
 
@@ -39,10 +39,10 @@ so that regressions are caught early.
 - Use GitHub Actions; no extra tooling beyond what is already in the repo.
 - CI must run `pytest` and fail the build on test failures.
 - Use pinned versions from project context:
-  - Python 3.9.6
+  - Python 3.9.x (CI uses 3.9 from setup-python)
   - pytest 8.2.2
   - `actions/checkout@v4`, `actions/setup-python@v5`
-- Install dev dependencies via `pip install -e ".[dev]"`.
+- Install dev dependencies via `pip install ".[dev]"` in CI (editable not supported by current build backend).
 - Keep CI minimal; no formatting/linting tools in this story.
 
 ### Architecture Compliance
@@ -56,7 +56,7 @@ so that regressions are caught early.
 - Do not add unnecessary jobs or steps.
 
 ### Library/Framework Requirements
-- Python: 3.9.6
+- Python: 3.9.x (CI)
 - pytest: 8.2.2
 - GitHub Actions: `actions/checkout@v4`, `actions/setup-python@v5`
 
@@ -65,8 +65,8 @@ so that regressions are caught early.
 - Keep tests in `tests/` with `test_*.py` naming.
 
 ### Testing Requirements
-- CI must run `python3.9 -m pytest`.
-- CI should install dependencies using `pip install -e ".[dev]"`.
+- CI must run `python -m pytest`.
+- CI should install dependencies using `pip install ".[dev]"`.
 
 ### Enhancements (Should Add)
 - Trigger CI on `push` and `pull_request`.
@@ -115,11 +115,13 @@ gpt-5.2-codex
 - 2026-01-27: Story 1.3 context generated (create-story workflow).
 - 2026-01-27: Added CI workflow job and validation test; pytest passing.
 - 2026-01-27: Code review fixes applied (runner pin, python invocation, pip upgrade).
+- 2026-01-27: CI install updated to non-editable to support PEP 517 backend.
 
 ### Completion Notes List
 - Ultimate context engine analysis completed - comprehensive developer guide created.
 - Added CI job with pinned actions and Python 3.9.6; added workflow assertions in tests; pytest passing.
 - Code review fixes: use `python` from setup-python, pin runner, upgrade pip in CI.
+- CI fix: install deps with `pip install ".[dev]"` to avoid build_editable error.
 
 ### File List
 - `docs/sprint-artifacts/1-3-ci-gate-with-pytest.md`
@@ -131,3 +133,4 @@ gpt-5.2-codex
 ## Change Log
 
 - 2026-01-27: Implemented CI pytest gate with pinned actions and Python 3.9.6; added workflow test; updated status.
+- 2026-01-27: Switched CI install to non-editable and aligned Python invocation.

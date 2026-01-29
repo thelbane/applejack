@@ -8,5 +8,5 @@ def test_ci_workflow_runs_pytest():
     assert "actions/setup-python@v5" in content
     assert "python-version: '3.9'" in content
     assert "python -m pip install --upgrade pip" in content
-    assert "python -m pip install -e \".[dev]\"" in content
+    assert "python -m pip install \".[dev]\"" in content
     assert "python -m pytest" in content
