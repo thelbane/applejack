@@ -40,7 +40,7 @@ development_status:
   1-1-scaffold-project-structure: done
   1-2-cli-skeleton-with-argparse: done
   1-3-ci-gate-with-pytest: done
-  1-4-decide-parser-strategy-ast-shape: backlog
+  1-4-decide-parser-strategy-ast-shape: ready-for-dev
   epic-1-retrospective: optional
 
   epic-2: backlog
