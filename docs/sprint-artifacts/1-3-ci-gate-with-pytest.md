@@ -24,9 +24,9 @@ so that regressions are caught early.
 ## Dev Notes
 
 ### Developer Context (Current State)
-- `.github/workflows/ci.yml` exists from Story 1.1 but is a stub.
-- Tests are under `tests/` and currently run with `python3.9 -m pytest`.
-- Project pins Python 3.9.6, pytest 8.2.2, and uses stdlib tooling only.
+- `.github/workflows/ci.yml` runs pytest on push/PR.
+- Tests live under `tests/` and run with `python -m pytest` in CI.
+- Project pins pytest 8.2.2 and uses stdlib tooling only.
 
 ### Epic Context (Epic 1: Foundation & Developer Workflow)
 - Epic objective: establish a consistent developer workflow and CLI foundation for Applejack.
@@ -44,7 +44,7 @@ so that regressions are caught early.
   - `actions/checkout@v4`, `actions/setup-python@v5`
 - Install dev dependencies via `pip install ".[dev]"` in CI (editable not supported by current build backend).
 - Ensure pytest is installed explicitly (`pip install "pytest==8.2.2"`) to avoid missing module errors.
-- Set `PYTHONPATH=src` in CI to make the `src/` layout importable without editable installs.
+- Set `PYTHONPATH=src` in CI so `python -m applejack` works with the `src/` layout.
 - Keep CI minimal; no formatting/linting tools in this story.
 
 ### Architecture Compliance
@@ -81,12 +81,11 @@ so that regressions are caught early.
 
 ### Previous Story Intelligence
 - Story 1.2 kept scope narrow and updated `.gitignore` to ignore build/test artifacts.
-- Tests are executed via `python3.9 -m pytest` and depend on optional `dev` extras.
-- CI workflow remained a stub and was explicitly left for Story 1.3.
+- Tests depend on optional `dev` extras.
 
 ### Git Intelligence Summary
 - Recent commits focused on scaffolding and CLI work (stories 1.1 and 1.2).
-- No prior CI gate implemented; expect to update `.github/workflows/ci.yml`.
+- CI gate was introduced in this story via `.github/workflows/ci.yml`.
 
 ### Latest Technical Information
 - Newer major versions exist for `actions/setup-python` and `actions/checkout`, but project pins `v5` and `v4` respectively. Stick to pinned versions for this story.
@@ -116,19 +115,12 @@ gpt-5.2-codex
 
 ### Debug Log References
 - 2026-01-27: Story 1.3 context generated (create-story workflow).
-- 2026-01-27: Added CI workflow job and validation test; pytest passing.
-- 2026-01-27: Code review fixes applied (runner pin, python invocation, pip upgrade).
-- 2026-01-27: CI install updated to non-editable to support PEP 517 backend.
-- 2026-01-27: CI installs pytest explicitly to avoid missing module errors.
-- 2026-01-27: CI sets `PYTHONPATH=src` to resolve imports from `src/` layout.
+- 2026-01-27: CI workflow implemented and stabilized (runner pin, python invocation, pip upgrade, pytest install, PYTHONPATH).
 
 ### Completion Notes List
 - Ultimate context engine analysis completed - comprehensive developer guide created.
-- Added CI job with pinned actions and Python 3.9.6; added workflow assertions in tests; pytest passing.
-- Code review fixes: use `python` from setup-python, pin runner, upgrade pip in CI.
-- CI fix: install deps with `pip install ".[dev]"` to avoid build_editable error.
-- CI fix: explicitly install `pytest==8.2.2` before running tests.
-- CI fix: set `PYTHONPATH=src` for module discovery.
+- Added CI job with pinned actions and Python 3.9; added workflow assertions in tests; pytest passing.
+- CI fixups: non-editable install, explicit pytest install, `PYTHONPATH=src`.
 
 ### File List
 - `docs/sprint-artifacts/1-3-ci-gate-with-pytest.md`
@@ -139,7 +131,4 @@ gpt-5.2-codex
 
 ## Change Log
 
-- 2026-01-27: Implemented CI pytest gate with pinned actions and Python 3.9.6; added workflow test; updated status.
-- 2026-01-27: Switched CI install to non-editable and aligned Python invocation.
-- 2026-01-27: Added explicit pytest install to CI.
-- 2026-01-27: Added `PYTHONPATH=src` to CI environment.
+- 2026-01-27: Implemented CI pytest gate, stabilized installs, and added workflow test.
