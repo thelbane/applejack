@@ -1,6 +1,6 @@
 # Story 1.3: CI Gate with pytest
 
-Status: ready-for-dev
+Status: Ready for Review
 
 ## Story
 
@@ -14,12 +14,12 @@ so that regressions are caught early.
 
 ## Tasks / Subtasks
 
-- [ ] Update `.github/workflows/ci.yml` to run pytest on push/PR (AC: 1)
-  - [ ] Use `actions/checkout@v4` and `actions/setup-python@v5`
-  - [ ] Use Python 3.9.6 and install `.[dev]` deps
-  - [ ] Run `python3.9 -m pytest` and fail on non-zero exit
-- [ ] Ensure CI does not introduce extra tooling (AC: 1)
-- [ ] Add/adjust tests only if needed for CI validation (AC: 1)
+- [x] Update `.github/workflows/ci.yml` to run pytest on push/PR (AC: 1)
+  - [x] Use `actions/checkout@v4` and `actions/setup-python@v5`
+  - [x] Use Python 3.9.6 and install `.[dev]` deps
+  - [x] Run `python3.9 -m pytest` and fail on non-zero exit
+- [x] Ensure CI does not introduce extra tooling (AC: 1)
+- [x] Add/adjust tests only if needed for CI validation (AC: 1)
 
 ## Dev Notes
 
@@ -73,7 +73,7 @@ so that regressions are caught early.
 - Cache Python dependencies if simple and already supported by setup-python (optional).
 
 ### Story Completion Status
-- Status: ready-for-dev
+- Status: Ready for Review
 - Completion note: Ultimate context engine analysis completed - comprehensive developer guide created.
 
 ### Previous Story Intelligence
@@ -113,9 +113,19 @@ gpt-5.2-codex
 
 ### Debug Log References
 - 2026-01-27: Story 1.3 context generated (create-story workflow).
+- 2026-01-27: Added CI workflow job and validation test; pytest passing.
 
 ### Completion Notes List
 - Ultimate context engine analysis completed - comprehensive developer guide created.
+- Added CI job with pinned actions and Python 3.9.6; added workflow assertions in tests; pytest passing.
 
 ### File List
 - `docs/sprint-artifacts/1-3-ci-gate-with-pytest.md`
+- `docs/sprint-artifacts/sprint-status.yaml`
+- `docs/sprint-artifacts/validation-report-2026-01-27-1-3.md`
+- `.github/workflows/ci.yml`
+- `tests/test_ci_workflow.py`
+
+## Change Log
+
+- 2026-01-27: Implemented CI pytest gate with pinned actions and Python 3.9.6; added workflow test; updated status.
