@@ -43,6 +43,7 @@ so that regressions are caught early.
   - pytest 8.2.2
   - `actions/checkout@v4`, `actions/setup-python@v5`
 - Install dev dependencies via `pip install ".[dev]"` in CI (editable not supported by current build backend).
+- Ensure pytest is installed explicitly (`pip install "pytest==8.2.2"`) to avoid missing module errors.
 - Keep CI minimal; no formatting/linting tools in this story.
 
 ### Architecture Compliance
@@ -66,7 +67,7 @@ so that regressions are caught early.
 
 ### Testing Requirements
 - CI must run `python -m pytest`.
-- CI should install dependencies using `pip install ".[dev]"`.
+- CI should install dependencies using `pip install ".[dev]"` and explicitly install pytest.
 
 ### Enhancements (Should Add)
 - Trigger CI on `push` and `pull_request`.
@@ -116,12 +117,14 @@ gpt-5.2-codex
 - 2026-01-27: Added CI workflow job and validation test; pytest passing.
 - 2026-01-27: Code review fixes applied (runner pin, python invocation, pip upgrade).
 - 2026-01-27: CI install updated to non-editable to support PEP 517 backend.
+- 2026-01-27: CI installs pytest explicitly to avoid missing module errors.
 
 ### Completion Notes List
 - Ultimate context engine analysis completed - comprehensive developer guide created.
 - Added CI job with pinned actions and Python 3.9.6; added workflow assertions in tests; pytest passing.
 - Code review fixes: use `python` from setup-python, pin runner, upgrade pip in CI.
 - CI fix: install deps with `pip install ".[dev]"` to avoid build_editable error.
+- CI fix: explicitly install `pytest==8.2.2` before running tests.
 
 ### File List
 - `docs/sprint-artifacts/1-3-ci-gate-with-pytest.md`
@@ -134,3 +137,4 @@ gpt-5.2-codex
 
 - 2026-01-27: Implemented CI pytest gate with pinned actions and Python 3.9.6; added workflow test; updated status.
 - 2026-01-27: Switched CI install to non-editable and aligned Python invocation.
+- 2026-01-27: Added explicit pytest install to CI.
