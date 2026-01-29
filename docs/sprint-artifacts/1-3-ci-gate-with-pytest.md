@@ -1,6 +1,6 @@
 # Story 1.3: CI Gate with pytest
 
-Status: Ready for Review
+Status: done
 
 ## Story
 
@@ -73,7 +73,7 @@ so that regressions are caught early.
 - Cache Python dependencies if simple and already supported by setup-python (optional).
 
 ### Story Completion Status
-- Status: Ready for Review
+- Status: done
 - Completion note: Ultimate context engine analysis completed - comprehensive developer guide created.
 
 ### Previous Story Intelligence
@@ -114,10 +114,12 @@ gpt-5.2-codex
 ### Debug Log References
 - 2026-01-27: Story 1.3 context generated (create-story workflow).
 - 2026-01-27: Added CI workflow job and validation test; pytest passing.
+- 2026-01-27: Code review fixes applied (runner pin, python invocation, pip upgrade).
 
 ### Completion Notes List
 - Ultimate context engine analysis completed - comprehensive developer guide created.
 - Added CI job with pinned actions and Python 3.9.6; added workflow assertions in tests; pytest passing.
+- Code review fixes: use `python` from setup-python, pin runner, upgrade pip in CI.
 
 ### File List
 - `docs/sprint-artifacts/1-3-ci-gate-with-pytest.md`
