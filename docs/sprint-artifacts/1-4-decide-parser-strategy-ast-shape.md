@@ -1,6 +1,6 @@
 # Story 1.4: Decide Parser Strategy + AST Shape
 
-Status: ready-for-dev
+Status: Ready for Review
 Decision Scope: Parser strategy (Earley vs LALR) + AST shape (single canonical vs phase-specific)
 Decision Criteria: ambiguity tolerance, error quality, performance, maintainability, testability
 
@@ -19,16 +19,16 @@ so that implementation is consistent.
 
 ## Tasks / Subtasks
 
-- [ ] Evaluate parser strategies (Earley vs LALR) using explicit criteria and select one (AC: 1,2)
-  - [ ] Document criteria: ambiguity tolerance, error quality, performance, maintainability, testability
-  - [ ] Record decision + rationale in ADR-001
-- [ ] Decide AST shape (single canonical vs phase-specific) and record decision (AC: 1,2)
-  - [ ] Document constraints for Phase 2 extensibility and stability
-  - [ ] Record decision + rationale in ADR-002
-- [ ] Update architecture and project context with final decisions (AC: 3,4)
-  - [ ] Add links to ADRs and summarize decisions in `docs/architecture.md`
-  - [ ] Update `docs/project_context.md` with parser strategy + AST shape rules
-  - [ ] Document parser configuration guidance and test alignment notes
+- [x] Evaluate parser strategies (Earley vs LALR) using explicit criteria and select one (AC: 1,2)
+  - [x] Document criteria: ambiguity tolerance, error quality, performance, maintainability, testability
+  - [x] Record decision + rationale in ADR-001
+- [x] Decide AST shape (single canonical vs phase-specific) and record decision (AC: 1,2)
+  - [x] Document constraints for Phase 2 extensibility and stability
+  - [x] Record decision + rationale in ADR-002
+- [x] Update architecture and project context with final decisions (AC: 3,4)
+  - [x] Add links to ADRs and summarize decisions in `docs/architecture.md`
+  - [x] Update `docs/project_context.md` with parser strategy + AST shape rules
+  - [x] Document parser configuration guidance and test alignment notes
 
 ## Dev Notes
 
@@ -97,14 +97,32 @@ so that implementation is consistent.
 
 gpt-5.2-codex
 
+### Implementation Plan
+- Write ADR-001 and ADR-002 documenting decisions and trade-offs.
+- Update architecture and project context to reflect decisions and guidance.
+- Mark story tasks complete and update status.
+
 ### Debug Log References
+
+None.
 
 ### Completion Notes List
 
 ### Completion Notes List
 - Ultimate context engine analysis completed - comprehensive developer guide created.
 - Parser strategy and AST shape decisions scoped with explicit criteria and ADR requirements.
+- ADR-001 and ADR-002 created with decisions, trade-offs, and testing notes.
+- Architecture and project context updated with accepted parser strategy and AST shape rules.
+- Parser configuration guidance and test alignment notes documented.
+- Tests: `pytest` (6 passed).
 
 ### File List
+- `docs/adr/ADR-001-parser-strategy.md`
+- `docs/adr/ADR-002-ast-shape.md`
+- `docs/architecture.md`
+- `docs/project_context.md`
 - `docs/sprint-artifacts/1-4-decide-parser-strategy-ast-shape.md`
 - `docs/sprint-artifacts/sprint-status.yaml`
+
+### Change Log
+- 2026-01-28: Recorded parser strategy and AST shape decisions in ADRs; updated architecture and project context.

@@ -51,8 +51,8 @@ Phase 3 completes the compiler pipeline with preprocessing, AST transformation, 
 - Deterministic output and stable transformations
 
 ### ADR Candidates (Decisions to Formalize Early)
-- **ADR-001 Parser Strategy:** **Lark Earley** for ambiguity tolerance and safer parsing of Applesoft edge cases
-- **ADR-002 AST Shape:** **Single canonical AST** with extension nodes/annotations for Phase 2 features
+- **ADR-001 Parser Strategy:** **Lark Earley** with ambiguity detection (Accepted; see `docs/adr/ADR-001-parser-strategy.md`)
+- **ADR-002 AST Shape:** **Single canonical AST** with extension nodes/annotations (Accepted; see `docs/adr/ADR-002-ast-shape.md`)
 - **ADR-003 Preprocessing Order:** Macro expansion vs include resolution vs label mapping order
 - **ADR-004 Variable Optimization:** Frequency-based renaming algorithm and collision avoidance rules
 - **ADR-005 Output Formatting:** Line-number assignment strategy and formatting stability guarantees
@@ -370,8 +370,8 @@ applejack/
 ### Implementation Readiness Validation ✅ (with minor gaps)
 **Decision Completeness:**
 - Core toolchain and CI decisions set.
-- **Gap:** Parser strategy (Earley vs LALR) not decided.
-- **Gap:** AST shape decision (single canonical AST vs phase‑specific) not decided.
+- **Resolved:** Parser strategy decided (see ADR-001).
+- **Resolved:** AST shape decided (see ADR-002).
 
 **Structure Completeness:**
 - Complete project tree defined.
@@ -381,8 +381,6 @@ applejack/
 
 ### Gap Analysis Results
 **Important Gaps:**
-- Parser strategy selection (affects grammar design + error handling).
-- AST shape decision (affects transform pipeline).
 - Version pins for Python/pytest/CI actions (not verified here).
 
 ### Validation Issues Addressed

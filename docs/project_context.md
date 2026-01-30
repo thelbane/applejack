@@ -37,6 +37,15 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Catch exceptions at CLI boundary; internal modules raise typed exceptions
 - No global mutable state across stages; pass AST/IR explicitly
 
+### Parser Strategy Rules
+- Use Lark **Earley** parser with `ambiguity="explicit"` and treat ambiguity as an error
+- Keep grammar deterministic; if ambiguity appears, fix grammar or fail fast
+- Preserve case-insensitive keywords and whitespace-optional syntax in parser config
+
+### AST Shape Rules
+- Maintain a single canonical AST in `src/applejack/parser/ast.py`
+- Represent Phase 2 features as extension nodes or annotations, not separate ASTs
+
 ### Framework-Specific Rules
 - Use stdlib `argparse` for CLI; avoid external CLI frameworks unless explicitly approved.
 
@@ -45,6 +54,8 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Keep golden fixtures in `tests/fixtures/`
 - Add explicit edge‑case tests for PRINT parsing and line‑number truncation
 - Validate grammar against legacy samples (`v1_legacy/samples/`)
+- Add ambiguity tests to ensure ambiguous inputs are rejected by the parser
+- Keep golden AST fixtures aligned with the canonical AST shape
 
 ### Code Quality & Style Rules
 - Prefer small, pure functions per stage
